@@ -25,10 +25,10 @@ public class EventConsumer {
     }
 
     @KafkaListener(topics = "APPLICATION_EVENT", groupId = "eventstore-group")
-    public void consumeApplicationEvent(String message) {
+    public void consumeApplicationEvent(Object message) {
         logger.info("Received Application Event: {}", message);
         Event event = new Event();
-        event.setMessage(message);
+        event.setMessage(message.toString());
         eventRepository.save(event);
     }
 }
