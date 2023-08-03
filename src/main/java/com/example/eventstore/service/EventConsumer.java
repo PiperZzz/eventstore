@@ -11,7 +11,12 @@ public class EventConsumer {
     static Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
     @KafkaListener(topics = "order-events", groupId = "eventstore-group")
-    public void consume(String message) {
-        logger.info("Received event: {}", message);
+    public void consumeOrderEvent(String message) {
+        logger.info("Received order event: {}", message);
+    }
+
+    @KafkaListener(topics = "application-events", groupId = "eventstore-group")
+    public void consumeApplicationEvent(String message) {
+        logger.info("Received application event: {}", message);
     }
 }
