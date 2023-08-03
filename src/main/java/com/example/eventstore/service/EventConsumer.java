@@ -19,9 +19,9 @@ public class EventConsumer {
         this.eventRepository = eventRepository;
     }
 
-    @KafkaListener(topics = "order-events", groupId = "eventstore-group")
-    public void consumeOrderEvent(String message) {
-        logger.info("Received order event: {}", message);
+    @KafkaListener(topics = "ORDER_EVENT", groupId = "eventstore-group")
+    public void consumeOrderEvent(Object order) {
+        logger.info("Received Order Event: {}", order);
     }
 
     @KafkaListener(topics = "APPLICATION_EVENT", groupId = "eventstore-group")
