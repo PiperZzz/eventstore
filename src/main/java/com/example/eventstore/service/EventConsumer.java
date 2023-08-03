@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 public class EventConsumer {
     static Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
-    @KafkaListener(topics = "APPLICATION_EVENT", groupId = "eventstore-group")
+    @KafkaListener(topics = "order-events", groupId = "eventstore-group")
     public void consumeOrderEvent(String message) {
         logger.info("Received order event: {}", message);
     }
 
-    @KafkaListener(topics = "application-events", groupId = "eventstore-group")
+    @KafkaListener(topics = "APPLICATION_EVENT", groupId = "eventstore-group")
     public void consumeApplicationEvent(String message) {
         logger.info("Received application event: {}", message);
     }
