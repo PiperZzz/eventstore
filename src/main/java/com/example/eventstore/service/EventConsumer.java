@@ -6,9 +6,18 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.eventstore.model.Event;
+import com.example.eventstore.repository.EventRepository;
+
 @Service
 public class EventConsumer {
     static Logger logger = LoggerFactory.getLogger(EventConsumer.class);
+
+    private final EventRepository eventRepository;
+
+    public EventConsumer(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     @KafkaListener(topics = "order-events", groupId = "eventstore-group")
     public void consumeOrderEvent(String message) {
@@ -18,5 +27,8 @@ public class EventConsumer {
     @KafkaListener(topics = "APPLICATION_EVENT", groupId = "eventstore-group")
     public void consumeApplicationEvent(String message) {
         logger.info("Received application event: {}", message);
+        Event event = new Event();
+        event.setMessage(message);
+        eventRepository.save(event);
     }
 }
