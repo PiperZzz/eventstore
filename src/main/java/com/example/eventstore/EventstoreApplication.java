@@ -12,7 +12,6 @@ public class EventstoreApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EventstoreApplication.class, args);
-		logger.info("Eventstore Ready!");
+		logger.info("Eventstore Application Server Ready!");
 	}
-
 }
